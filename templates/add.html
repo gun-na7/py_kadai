@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>思い出記録</title>
+</head>
+
+<body>
+
+    <h1>思い出を記録する</h1>
+
+    <form action="/add" method="POST" enctype="multipart/form-data">
+
+        <div>
+            <label>サムネイル</label>
+            <br>
+            <input
+                type="file"
+                name="photo"
+                accept="image/*"
+            >
+        </div>
+
+        <br>
+
+        <div>
+            <label>タイトル</label>
+            <br>
+            <input
+                type="text"
+                name="title"
+                placeholder="タイトルを入力"
+                required
+            >
+        </div>
+
+        <br>
+
+        <div>
+            <label>場所</label>
+            <br>
+            <input
+                type="text"
+                name="location"
+                placeholder="場所を入力"
+            >
+        </div>
+
+        <br>
+
+        <div>
+            <label>メモ</label>
+            <br>
+            <textarea
+                name="memo"
+                placeholder="メモを入力"
+                rows="5"
+                cols="40"
+            ></textarea>
+        </div>
+
+        <br>
+
+        <button type="submit">
+            登録
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/">一覧に戻る</a>
+
+</body>
+
+</html>

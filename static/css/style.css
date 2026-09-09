@@ -1,0 +1,108 @@
+body {
+    margin: 0 auto;
+    background-color: #f5f5f5;
+}
+
+/* index.html */
+.title h1 {
+    text-align: center;
+    margin: 0;
+    font-size: 36px;
+    padding-top: 20px;
+}
+
+.memory-table {
+    width: 90%;
+    height: 200px;
+    margin: 30px auto;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: #f0f8ff;
+}
+
+.memory-table.empty-table {
+    background-color: transparent;
+}
+
+/* 見出し */
+.memory-table th {
+    padding: 15px;
+    background-color: #228b22;
+    color: white;
+    border: 1px solid #ccc;
+}
+
+/* データ */
+.memory-table td {
+    padding: 15px;
+    border: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* 写真 */
+.memory-photo {
+    width: 20%;
+}
+
+.memory-photo img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    object-fit: contain;
+    text-align: center;
+}
+
+/* タイトル */
+
+.memory-title {
+    width: 18%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* 場所 */
+.memory-location {
+    width: 15%;
+}
+
+/* メモ */
+.memory-memo {
+    width: 32%;
+    text-align: left !important;
+}
+
+/* 修正 */
+.memory-action {
+    width: 15%;
+    text-align: center;
+}
+
+/* ボタン */
+.edit-button,
+.delete-button {
+    display: block;
+    width: 80px;
+    padding: 8px 12px;
+    margin: 5px auto;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* 編集ボタン */
+.edit-button {
+    background-color: #3498db;
+}
+
+/* 削除ボタン */
+.delete-button {
+    background-color: #e74c3c;
+}
+
+/* ボタンホバー */
+.edit-button:hover,
+.delete-button:hover {
+    opacity: 0.7;
+}
