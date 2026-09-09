@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/css/reset.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <title>思い出記録</title>
+    </head>
+
+    <body>
+
+        <h1>思い出</h1>
+
+        <a href="/add">
+            新しい思い出の記録
+        </a>
+
+        <hr>
+
+        {% if posts %}
+
+            {% for post in posts %}
+
+                <div>
+
+                    <h2>{{ post[1] }}</h2>
+
+                    {% if post[2] %}
+                        <img
+                            src="{{ url_for('static', filename='uploads/' + post[2]) }}"
+                            width="300"
+                        >
+                    {% endif %}
+
+                    <p>
+                        <strong>場所：</strong>
+                        {{ post[3] }}
+                    </p>
+
+                    <p>
+                        <strong>メモ：</strong>
+                        {{ post[4] }}
+                    </p>
+
+                </div>
+
+                <hr>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>
+                まだ登録されていません。
+            </p>
+
+        {% endif %}
+
+    </body>
+
+</html>
