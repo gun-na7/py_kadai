@@ -3,14 +3,18 @@
 
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="/css/reset.css">
-        <link rel="stylesheet" href="/css/style.css">
+
+        <link rel="stylesheet" href="../static/css/reset.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+
         <title>思い出記録</title>
     </head>
 
     <body>
 
-        <h1>思い出</h1>
+        <div class="title">
+            <h1>思い出</h1>
+        </div>
 
         <a href="/add">
             新しい思い出の記録
@@ -20,34 +24,87 @@
 
         {% if posts %}
 
-            {% for post in posts %}
+            <!-- 一覧表 -->
+            <table class="memory-table">
 
-                <div>
+                <!-- 見出し -->
+                <thead>
+                    <tr>
+                        <th>写真</th>
+                        <th>タイトル</th>
+                        <th>場所</th>
+                        <th>メモ</th>
+                        <th>修正</th>
+                    </tr>
+                </thead>
 
-                    <h2>{{ post[1] }}</h2>
+                <!-- 登録データ -->
+                <tbody>
 
-                    {% if post[2] %}
-                        <img
-                            src="{{ url_for('static', filename='uploads/' + post[2]) }}"
-                            width="300"
-                        >
-                    {% endif %}
+                    {% for post in posts %}
 
-                    <p>
-                        <strong>場所：</strong>
-                        {{ post[3] }}
-                    </p>
+                        <tr>
 
-                    <p>
-                        <strong>メモ：</strong>
-                        {{ post[4] }}
-                    </p>
+                            <!-- 写真 -->
+                            <td class="memory-photo">
 
-                </div>
+                                {% if post[2] %}
 
-                <hr>
+                                    <img
+                                        src="{{ url_for('static', filename='uploads/' + post[2]) }}"
+                                        alt="{{ post[1] }}"
+                                    >
 
-            {% endfor %}
+                                {% else %}
+
+                                    写真なし
+
+                                {% endif %}
+
+                            </td>
+
+                            <!-- タイトル -->
+                            <td class="memory-title">
+                                {{ post[1] }}
+                            </td>
+
+                            <!-- 場所 -->
+                            <td class="memory-location">
+                                {{ post[3] }}
+                            </td>
+
+                            <!-- メモ -->
+                            <td class="memory-memo">
+                                {{ post[4] }}
+                            </td>
+
+                            <!-- 編集 -->
+                            <td class="memory-action">
+
+                                <a
+                                    href="/edit/{{ post[0] }}"
+                                    class="edit-button"
+                                >
+                                    編集
+                                </a>
+
+                                <a
+                                    href="/delete/{{ post[0] }}"
+                                    class="delete-button"
+                                    onclick="return confirm('この思い出を削除しますか？');"
+                                >
+                                    削除
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
 
         {% else %}
 

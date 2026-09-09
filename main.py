@@ -5,17 +5,14 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-# 写真の保存先
+# 写真の保存
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-# uploadsフォルダがなければ作る
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
-# =========================
 # DBを作成
-# =========================
 def init_db():
     con = sqlite3.connect("database.db")
     cur = con.cursor()
@@ -34,9 +31,7 @@ def init_db():
     con.close()
 
 
-# =========================
-# 一覧表示
-# =========================
+# 一覧
 @app.route("/")
 def index():
 
@@ -51,9 +46,7 @@ def index():
     return render_template("index.html", posts=posts)
 
 
-# =========================
 # 入力フォーム
-# =========================
 @app.route("/add", methods=["GET", "POST"])
 def add():
 
@@ -103,9 +96,7 @@ def add():
     return render_template("add.html")
 
 
-# =========================
 # 起動
-# =========================
 if __name__ == "__main__":
     init_db()
     app.run(debug=True)
