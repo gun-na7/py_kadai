@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 # 設定
 UPLOAD_FOLDER = "static/uploads"
-
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
@@ -15,7 +14,6 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 def get_db():
 
     con = sqlite3.connect("database.db")
-
     return con
 
 
@@ -23,7 +21,6 @@ def get_db():
 def init_db():
 
     con = get_db()
-
     cursor = con.cursor()
 
     cursor.execute("""
@@ -51,7 +48,7 @@ def index():
     cursor.execute("""
         SELECT id, title, photo, location, memo
         FROM memories
-        ORDER BY id DESC
+        ORDER BY id ASC
     """)
 
     posts = cursor.fetchall()
