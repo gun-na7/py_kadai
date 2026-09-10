@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>思い出記録</title>
+</head>
+
+<body>
+
+    <h1>思い出を編集する</h1>
+
+    <form
+        action="/edit/{{ post[0] }}"
+        method="POST"
+        enctype="multipart/form-data"
+    >
+
+        <div>
+            <label>サムネイル</label>
+            <br>
+
+            <input
+                type="file"
+                name="photo"
+                accept="image/*"
+            >
+        </div>
+
+        <br>
+
+        <div>
+            <label>タイトル</label>
+            <br>
+
+            <input
+                type="text"
+                name="title"
+                value="{{ post[1] }}"
+                placeholder="タイトルを入力"
+                required
+            >
+        </div>
+
+        <br>
+
+        <div>
+            <label>場所</label>
+            <br>
+
+            <input
+                type="text"
+                name="location"
+                value="{{ post[3] }}"
+                placeholder="場所を入力"
+            >
+        </div>
+
+        <br>
+
+        <div>
+            <label>メモ</label>
+            <br>
+
+            <textarea
+                name="memo"
+                placeholder="メモを入力"
+                rows="5"
+                cols="40"
+            >{{ post[4] }}</textarea>
+        </div>
+
+        <br>
+
+        <button type="submit">
+            更新
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/">一覧に戻る</a>
+
+</body>
+
+</html>

@@ -218,7 +218,6 @@ def edit(id):
 
     return redirect("/")
 
-
 # 削除 DELETE
 @app.route("/delete/<int:id>")
 def delete(id):
