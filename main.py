@@ -3,32 +3,28 @@ import sqlite3
 import os
 import uuid
 
-
 app = Flask(__name__)
 
 # 設定
-
 UPLOAD_FOLDER = "static/uploads"
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
 # データベース接続
-
 def get_db():
 
-    conn = sqlite3.connect("database.db")
+    con = sqlite3.connect("database.db")
 
-    return conn
+    return con
 
 
 # テーブル作成
-
 def init_db():
 
-    conn = get_db()
+    con = get_db()
 
-    cursor = conn.cursor()
+    cursor = con.cursor()
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS memories (
@@ -40,19 +36,16 @@ def init_db():
         )
     """)
 
-    conn.commit()
-
-    conn.close()
+    con.commit()
+    con.close()
 
 
 # 参照 SELECT
-
 @app.route("/")
 def index():
 
-    conn = get_db()
-
-    cursor = conn.cursor()
+    con = get_db()
+    cursor = con.cursor()
 
     # データを取得
     cursor.execute("""
@@ -62,8 +55,7 @@ def index():
     """)
 
     posts = cursor.fetchall()
-
-    conn.close()
+    con.close()
 
     return render_template(
         "index.html",
@@ -72,7 +64,6 @@ def index():
 
 
 # 登録 INSERT
-
 @app.route("/add", methods=["GET", "POST"])
 def add():
 
@@ -85,16 +76,11 @@ def add():
     # フォームからデータ取得
 
     title = request.form.get("title")
-
     location = request.form.get("location")
-
     memo = request.form.get("memo")
-
     photo = request.files.get("photo")
 
-
     # 写真を保存
-
     filename = ""
 
     if photo and photo.filename:
@@ -112,12 +98,9 @@ def add():
             )
         )
 
-
     # INSERT
-
-    conn = get_db()
-
-    cursor = conn.cursor()
+    con = get_db()
+    cursor = con.cursor()
 
     cursor.execute("""
         INSERT INTO memories
@@ -130,23 +113,19 @@ def add():
         memo
     ))
 
-    conn.commit()
-
-    conn.close()
-
+    con.commit()
+    con.close()
 
     # 一覧画面へ
     return redirect("/")
 
 
 # 修正 UPDATE
-
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id):
 
-    conn = get_db()
-
-    cursor = conn.cursor()
+    con = get_db()
+    cursor = con.cursor()
 
 
     # 修正するデータをSELECT
@@ -161,13 +140,11 @@ def edit(id):
 
         post = cursor.fetchone()
 
-        conn.close()
+        con.close()
 
 
         if post is None:
-
             return "データがありません"
-
 
         return render_template(
             "edit.html",
@@ -178,16 +155,11 @@ def edit(id):
     # POST → UPDATE
 
     title = request.form.get("title")
-
     location = request.form.get("location")
-
     memo = request.form.get("memo")
 
-
     # 写真
-
     photo = request.files.get("photo")
-
 
     if photo and photo.filename:
 
@@ -203,7 +175,6 @@ def edit(id):
                 filename
             )
         )
-
 
         # 写真も更新
         cursor.execute("""
@@ -245,23 +216,18 @@ def edit(id):
         ))
 
 
-    conn.commit()
-
-    conn.close()
-
+    con.commit()
+    con.close()
 
     return redirect("/")
 
 
 # 削除 DELETE
-
 @app.route("/delete/<int:id>")
 def delete(id):
 
-    conn = get_db()
-
-    cursor = conn.cursor()
-
+    con = get_db()
+    cursor = con.cursor()
 
     # DELETE
     cursor.execute("""
@@ -269,22 +235,13 @@ def delete(id):
         WHERE id = ?
     """, (id,))
 
-
-    conn.commit()
-
-    conn.close()
-
+    con.commit()
+    con.close()
 
     return redirect("/")
 
 
 # アプリ起動
-
 if __name__ == "__main__":
-
     init_db()
-
-    app.run(
-        debug=True,
-        port=8888
-    )
+    app.run('0.0.0.0', 8000, debug=True)
