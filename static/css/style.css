@@ -20,6 +20,10 @@ body {
     background-color: #f0f8ff;
 }
 
+.memory-table.empty-table {
+    background-color: transparent;
+}
+
 /* 見出し */
 .memory-table th {
     padding: 15px;
@@ -59,9 +63,7 @@ body {
 
 /* 場所 */
 .memory-location {
-
     width: 15%;
-
 }
 
 /* メモ */
