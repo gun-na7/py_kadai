@@ -16,11 +16,11 @@
         <h1>思い出</h1>
     </div>
 
-    <a href="/add">
-        新しい思い出の記録
-    </a>
-
-    <hr>
+    <div class="registration">
+        <a href="/add">
+            ＋新しい思い出の記録
+        </a>
+    </div>
 
     <!-- 一覧表 -->
     <table class="memory-table {% if not posts %}empty-table{% endif %}">
@@ -55,7 +55,7 @@
 
                     {% else %}
 
-                        写真なし
+                        No image
 
                     {% endif %}
 
